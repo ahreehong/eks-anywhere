@@ -21,6 +21,7 @@ spec:
         imageTag: v1.8.0-eks-1-19-4
       apiServer:
         extraArgs:
+          anonymous-auth: "false"
           cloud-provider: external
       controllerManager:
         extraArgs:
