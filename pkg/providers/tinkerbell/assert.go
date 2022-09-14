@@ -119,12 +119,15 @@ func AssertTinkerbellIPAndControlPlaneIPNotSame(spec *ClusterSpec) error {
 	return nil
 }
 
-func AssertPort80IsNotInUse(client networkutils.NetClient) ClusterSpecAssertion {
+// AssertPortsNotInUse ensures that ports 80, 42113, and 50061
+func AssertPortsNotInUse(client networkutils.NetClient) ClusterSpecAssertion {
 	return func(spec *ClusterSpec) error {
-		port := "80"
 		host := "0.0.0.0"
-		if networkutils.IsPortInUse(client, host, port) {
-			return fmt.Errorf("port 80 of host is already in use")
+		ports := []string{"80", "42113", "50061"}
+		for _, port := range ports {
+			if networkutils.IsPortInUse(client, host, port) {
+				return fmt.Errorf("port %s of host is already in use, please clean up ports", port)
+			}
 		}
 		return nil
 	}
