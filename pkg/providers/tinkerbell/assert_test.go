@@ -255,7 +255,7 @@ func TestAssertPortsNotInUse_Fails(t *testing.T) {
 	netClient := mocks.NewMockNetClient(ctrl)
 	netClient.EXPECT().
 		DialTimeout(gomock.Any(), gomock.Any(), gomock.Any()).
-		Return(client, nil).AnyTimes()
+		Return(client, nil)
 
 	clusterSpec := NewDefaultValidClusterSpecBuilder().Build()
 

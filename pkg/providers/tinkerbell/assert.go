@@ -3,7 +3,6 @@ package tinkerbell
 import (
 	"errors"
 	"fmt"
-
 	"github.com/aws/eks-anywhere/pkg/api/v1alpha1"
 	"github.com/aws/eks-anywhere/pkg/cluster"
 	"github.com/aws/eks-anywhere/pkg/networkutils"
@@ -119,15 +118,12 @@ func AssertTinkerbellIPAndControlPlaneIPNotSame(spec *ClusterSpec) error {
 	return nil
 }
 
-// AssertPortsNotInUse ensures that ports 80, 42113, and 50061
+// AssertPortsNotInUse ensures that ports 80, 42113, and 50061 are available
 func AssertPortsNotInUse(client networkutils.NetClient) ClusterSpecAssertion {
 	return func(spec *ClusterSpec) error {
 		host := "0.0.0.0"
-		ports := []string{"80", "42113", "50061"}
-		for _, port := range ports {
-			if networkutils.IsPortInUse(client, host, port) {
-				return fmt.Errorf("port %s of host is already in use, please clean up ports", port)
-			}
+		if err := validatePortsAvailable(client, host); err != nil {
+			return err
 		}
 		return nil
 	}
