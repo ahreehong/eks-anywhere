@@ -27,6 +27,18 @@ spec:
       servers:
         - time-a.ntp.local
         - time-b.ntp.local
+    certBundles:
+    - name: "bundle_1"
+      data: |
+        -----BEGIN CERTIFICATE-----
+        MIIF1DCCA...
+        ...
+        es6RXmsCj...
+        -----END CERTIFICATE-----
+
+        -----BEGIN CERTIFICATE-----
+        ...
+        -----END CERTIFICATE-----
     bottlerocketConfiguration:
       kubernetes:
         allowedUnsafeSysctls:
@@ -46,6 +58,19 @@ Top level object used for host OS configurations.
 
     * ##### `servers`
       Servers is a list of NTP servers that should be configured on EKS Anywhere cluster nodes.
+  
+  * #### `certBundles`
+    Key used for configuring custom trusted CA certs on your EKS Anywhere cluster nodes. Multiple cert bundles can be configured.
+      
+    {{% alert title="Note" color="primary" %}}
+    This setting is _only valid_ for Botlerocket OS.
+    {{% /alert %}}
+
+    * ##### `name`
+    Name of the cert bundle that should be configured on EKS Anywhere cluster nodes. This must be a unique name for each entry
+
+    * ##### `data`
+    Data of the cert bundle that should be configured on EKS Anywhere cluster nodes. This takes in a PEM formatted cert bundle and can contain more than one CA cert per entry.
 
 <br>
 
@@ -63,3 +88,19 @@ Top level object used for host OS configurations.
 
       * ##### `maxPods`
         Maximum number of pods that can be scheduled on each node.
+
+    * ##### `kernel`
+      Key used for configuring Bottlerocket Kernel settings.
+       
+      * ##### `sysctlSettings`
+        Map of kernel sysctl settings that should be enabled on the node.
+
+    * ##### `boot`
+      Key used for configuring Bottlerocket Boot settings.
+
+      {{% alert title="Note" color="primary" %}}
+      This setting has not been fully validated for baremetal.
+      {{% /alert %}}
+
+      * ##### `bootKernelParameters`
+        Map of Boot Kernel parameters Bottlerocket should configure.
