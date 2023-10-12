@@ -2125,3 +2125,16 @@ func TestTinkerbellAirgappedKubernetes128UbuntuProxyConfigFlow(t *testing.T) {
 
 	runTinkerbellAirgapConfigProxyFlow(test, "10.80.0.0/16")
 }
+
+// OOB test
+func TestTinkerbellKubernetes127UbuntuOOB(t *testing.T) {
+	test := framework.NewClusterE2ETest(
+		t,
+		framework.NewTinkerbell(t, framework.WithUbuntu127Tinkerbell()),
+		framework.WithClusterFiller(api.WithKubernetesVersion(v1alpha1.Kube127)),
+		framework.WithOOBConfiguration(),
+		framework.WithControlPlaneHardware(1),
+		framework.WithWorkerHardware(1),
+	)
+	runOOBConfigFlow(test)
+}
