@@ -8,8 +8,9 @@ import (
 )
 
 const (
-	cloudstackRegex   = `^.*CloudStack.*$`
-	cloudstackCidrVar = "T_CLOUDSTACK_CIDR"
+	cloudstackRegex          = `^.*CloudStack.*$`
+	cloudstackCidrVar        = "T_CLOUDSTACK_CIDR"
+	cloudstackPrivateCidrVar = "T_CLOUDSTACK_PRIVATE_CIDR"
 )
 
 func (e *E2ESession) setupCloudStackEnv(testRegex string) error {
@@ -19,6 +20,12 @@ func (e *E2ESession) setupCloudStackEnv(testRegex string) error {
 	}
 
 	requiredEnvVars := e2etests.RequiredCloudstackEnvVars()
+
+	privateNetworkRe := regexp.MustCompile(`^.*(Proxy|RegistryMirror).*$`)
+	if privateNetworkRe.MatchString(testRegex) {
+		requiredEnvVars = append(requiredEnvVars, e2etests.RequiredPrivateCloudStackEnvVars()...)
+	}
+
 	for _, eVar := range requiredEnvVars {
 		if val, ok := os.LookupEnv(eVar); ok {
 			e.testEnvVars[eVar] = val

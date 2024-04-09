@@ -337,6 +337,7 @@ func splitTests(testsList []string, conf ParallelRunConf) ([]instanceRunConf, er
 	vsphereIPMan := newE2EIPManager(conf.Logger, os.Getenv(vsphereCidrVar))
 	vspherePrivateIPMan := newE2EIPManager(conf.Logger, os.Getenv(vspherePrivateNetworkCidrVar))
 	cloudstackIPMan := newE2EIPManager(conf.Logger, os.Getenv(cloudstackCidrVar))
+	cloudstackPrivateIPMan := newE2EIPManager(conf.Logger, os.Getenv(cloudstackPrivateCidrVar))
 	nutanixIPMan := newE2EIPManager(conf.Logger, os.Getenv(nutanixCidrVar))
 
 	awsSession, err := session.NewSession()
@@ -376,10 +377,18 @@ func splitTests(testsList []string, conf ParallelRunConf) ([]instanceRunConf, er
 		} else if nutanixTestsRe.MatchString(testName) {
 			ips = nutanixIPMan.reserveIPPool(minIPPoolSize)
 		} else if cloudstackTestRe.MatchString(testName) {
-			if multiClusterTest {
-				ips = cloudstackIPMan.reserveIPPool(maxIPPoolSize)
+			if privateNetworkTestsRe.MatchString(testName) {
+				if multiClusterTest {
+					ips = cloudstackPrivateIPMan.reserveIPPool(maxIPPoolSize)
+				} else {
+					ips = cloudstackPrivateIPMan.reserveIPPool(minIPPoolSize)
+				}
 			} else {
-				ips = cloudstackIPMan.reserveIPPool(minIPPoolSize)
+				if multiClusterTest {
+					ips = cloudstackIPMan.reserveIPPool(maxIPPoolSize)
+				} else {
+					ips = cloudstackIPMan.reserveIPPool(minIPPoolSize)
+				}
 			}
 		}
 

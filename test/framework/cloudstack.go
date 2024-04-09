@@ -42,6 +42,7 @@ const (
 	cloudstackComputeOfferingLargerVar          = "T_CLOUDSTACK_COMPUTE_OFFERING_LARGER"
 	cloudStackClusterIPPoolEnvVar               = "T_CLOUDSTACK_CLUSTER_IP_POOL"
 	cloudStackCidrVar                           = "T_CLOUDSTACK_CIDR"
+	cloudStackPrivateCidrVar                    = "T_CLOUDSTACK_PRIVATE_CIDR"
 	podCidrVar                                  = "T_CLOUDSTACK_POD_CIDR"
 	serviceCidrVar                              = "T_CLOUDSTACK_SERVICE_CIDR"
 	cloudstackFeatureGateEnvVar                 = "CLOUDSTACK_PROVIDER"
@@ -75,6 +76,10 @@ var requiredCloudStackEnvVars = []string{
 	serviceCidrVar,
 	cloudstackFeatureGateEnvVar,
 	cloudstackB64EncodedSecretEnvVar,
+}
+
+var requiredPrivateCloudStackEnvVars = []string{
+	cloudStackPrivateCidrVar,
 }
 
 type CloudStack struct {
@@ -222,7 +227,15 @@ func WithCloudStackRedhat9Kubernetes129() CloudStackOpt {
 
 func WithCloudStackFillers(fillers ...api.CloudStackFiller) CloudStackOpt {
 	return func(c *CloudStack) {
+		checkRequiredEnvVars(c.t, RequiredPrivateCloudStackEnvVars())
 		c.fillers = append(c.fillers, fillers...)
+	}
+}
+
+// WithCloudStackPrivateNetwork returns a function which can be invoked to configure the Cloudstack object to use a private cidr.
+func WithCloudStackPrivateNetwork() CloudStackOpt {
+	return func(c *CloudStack) {
+		c.cidr = os.Getenv(privateNetworkCidrVar)
 	}
 }
 
@@ -290,6 +303,11 @@ func (c *CloudStack) getControlPlaneIP() (string, error) {
 
 func RequiredCloudstackEnvVars() []string {
 	return requiredCloudStackEnvVars
+}
+
+// RequiredPrivateCloudStackEnvVars returns the required env vars to run cloudstack private network tests.
+func RequiredPrivateCloudStackEnvVars() []string {
+	return requiredPrivateCloudStackEnvVars
 }
 
 func (c *CloudStack) WithNewCloudStackWorkerNodeGroup(name string, workerNodeGroup *WorkerNodeGroup, fillers ...api.CloudStackMachineConfigFiller) ClusterE2ETestOpt {

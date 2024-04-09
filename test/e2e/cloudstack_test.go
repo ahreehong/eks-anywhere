@@ -1717,6 +1717,11 @@ func TestCloudStackKubernetes125RedhatProxyConfig(t *testing.T) {
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes125()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
@@ -1730,6 +1735,11 @@ func TestCloudStackKubernetes126RedhatProxyConfig(t *testing.T) {
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes126()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
@@ -1743,6 +1753,11 @@ func TestCloudStackKubernetes127RedhatProxyConfig(t *testing.T) {
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes127()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
@@ -1756,6 +1771,11 @@ func TestCloudStackKubernetes128RedhatProxyConfig(t *testing.T) {
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes128()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
@@ -1769,6 +1789,11 @@ func TestCloudStackKubernetes129RedhatProxyConfig(t *testing.T) {
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes129()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
@@ -1784,6 +1809,11 @@ func TestCloudStackKubernetes125RedhatProxyConfigAPI(t *testing.T) {
 	managementCluster := framework.NewClusterE2ETest(
 		t,
 		cloudstack,
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 	).WithClusterConfig(
 		api.ClusterToConfigFiller(
 			api.WithControlPlaneCount(1),
@@ -1798,6 +1828,11 @@ func TestCloudStackKubernetes125RedhatProxyConfigAPI(t *testing.T) {
 			t,
 			cloudstack,
 			framework.WithClusterName(test.NewWorkloadClusterName()),
+			framework.WithCloudStackPrivateNetwork(),
+			framework.WithCloudStackFillers(
+				framework.RemoveAllCloudStackAzs(),
+				framework.UpdateAddCloudStackAz3(),
+			),
 			framework.WithProxy(framework.CloudstackProxyRequiredEnvVars),
 		).WithClusterConfig(
 			api.ClusterToConfigFiller(
@@ -1828,6 +1863,11 @@ func TestCloudStackKubernetes126RedhatProxyConfigAPI(t *testing.T) {
 	managementCluster := framework.NewClusterE2ETest(
 		t,
 		cloudstack,
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 	).WithClusterConfig(
 		api.ClusterToConfigFiller(
 			api.WithControlPlaneCount(1),
@@ -1843,6 +1883,11 @@ func TestCloudStackKubernetes126RedhatProxyConfigAPI(t *testing.T) {
 			cloudstack,
 			framework.WithClusterName(test.NewWorkloadClusterName()),
 			framework.WithProxy(framework.CloudstackProxyRequiredEnvVars),
+			framework.WithCloudStackPrivateNetwork(),
+			framework.WithCloudStackFillers(
+				framework.RemoveAllCloudStackAzs(),
+				framework.UpdateAddCloudStackAz3(),
+			),
 		).WithClusterConfig(
 			api.ClusterToConfigFiller(
 				api.WithManagementCluster(managementCluster.ClusterName),
@@ -1872,6 +1917,11 @@ func TestCloudStackKubernetes127RedhatProxyConfigAPI(t *testing.T) {
 	managementCluster := framework.NewClusterE2ETest(
 		t,
 		cloudstack,
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 	).WithClusterConfig(
 		api.ClusterToConfigFiller(
 			api.WithControlPlaneCount(1),
@@ -1887,6 +1937,11 @@ func TestCloudStackKubernetes127RedhatProxyConfigAPI(t *testing.T) {
 			cloudstack,
 			framework.WithClusterName(test.NewWorkloadClusterName()),
 			framework.WithProxy(framework.CloudstackProxyRequiredEnvVars),
+			framework.WithCloudStackPrivateNetwork(),
+			framework.WithCloudStackFillers(
+				framework.RemoveAllCloudStackAzs(),
+				framework.UpdateAddCloudStackAz3(),
+			),
 		).WithClusterConfig(
 			api.ClusterToConfigFiller(
 				api.WithManagementCluster(managementCluster.ClusterName),
@@ -1916,6 +1971,11 @@ func TestCloudStackKubernetes128RedhatProxyConfigAPI(t *testing.T) {
 	managementCluster := framework.NewClusterE2ETest(
 		t,
 		cloudstack,
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 	).WithClusterConfig(
 		api.ClusterToConfigFiller(
 			api.WithControlPlaneCount(1),
@@ -1931,6 +1991,11 @@ func TestCloudStackKubernetes128RedhatProxyConfigAPI(t *testing.T) {
 			cloudstack,
 			framework.WithClusterName(test.NewWorkloadClusterName()),
 			framework.WithProxy(framework.CloudstackProxyRequiredEnvVars),
+			framework.WithCloudStackPrivateNetwork(),
+			framework.WithCloudStackFillers(
+				framework.RemoveAllCloudStackAzs(),
+				framework.UpdateAddCloudStackAz3(),
+			),
 		).WithClusterConfig(
 			api.ClusterToConfigFiller(
 				api.WithManagementCluster(managementCluster.ClusterName),
@@ -1960,6 +2025,11 @@ func TestCloudStackKubernetes125RedhatRegistryMirrorInsecureSkipVerify(t *testin
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes125()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -1973,6 +2043,11 @@ func TestCloudStackKubernetes126RedhatRegistryMirrorInsecureSkipVerify(t *testin
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes126()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -1986,6 +2061,11 @@ func TestCloudStackKubernetes127RedhatRegistryMirrorInsecureSkipVerify(t *testin
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes127()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -1999,6 +2079,11 @@ func TestCloudStackKubernetes128RedhatRegistryMirrorInsecureSkipVerify(t *testin
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes128()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -2012,6 +2097,11 @@ func TestCloudStackKubernetes125RedhatRegistryMirrorAndCert(t *testing.T) {
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes125()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -2025,6 +2115,11 @@ func TestCloudStackKubernetes126RedhatRegistryMirrorAndCert(t *testing.T) {
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes126()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -2038,6 +2133,11 @@ func TestCloudStackKubernetes127RedhatRegistryMirrorAndCert(t *testing.T) {
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes127()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -2051,6 +2151,11 @@ func TestCloudStackKubernetes128RedhatRegistryMirrorAndCert(t *testing.T) {
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes128()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -2064,6 +2169,11 @@ func TestCloudStackKubernetes129RedhatRegistryMirrorAndCert(t *testing.T) {
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes129()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -2077,6 +2187,11 @@ func TestCloudStackKubernetes125RedhatAuthenticatedRegistryMirror(t *testing.T) 
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes125()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -2090,6 +2205,11 @@ func TestCloudStackKubernetes126RedhatAuthenticatedRegistryMirror(t *testing.T) 
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes126()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -2103,6 +2223,11 @@ func TestCloudStackKubernetes127RedhatAuthenticatedRegistryMirror(t *testing.T) 
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes127()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -2116,6 +2241,11 @@ func TestCloudStackKubernetes128RedhatAuthenticatedRegistryMirror(t *testing.T) 
 	test := framework.NewClusterE2ETest(
 		t,
 		framework.NewCloudStack(t, framework.WithCloudStackRedhat9Kubernetes128()),
+		framework.WithCloudStackPrivateNetwork(),
+		framework.WithCloudStackFillers(
+			framework.RemoveAllCloudStackAzs(),
+			framework.UpdateAddCloudStackAz3(),
+		),
 		framework.WithClusterFiller(api.WithControlPlaneCount(1)),
 		framework.WithClusterFiller(api.WithWorkerNodeCount(1)),
 		framework.WithClusterFiller(api.WithExternalEtcdTopology(1)),
@@ -3570,6 +3700,7 @@ func TestCloudStackKubernetes125RedhatAirgappedRegistryMirror(t *testing.T) {
 		t,
 		framework.NewCloudStack(t,
 			framework.WithCloudStackRedhat9Kubernetes125(),
+			framework.WithCloudStackPrivateNetwork(),
 			framework.WithCloudStackFillers(
 				framework.RemoveAllCloudStackAzs(),
 				framework.UpdateAddCloudStackAz3(),
@@ -3592,6 +3723,7 @@ func TestCloudStackKubernetes126RedhatAirgappedRegistryMirror(t *testing.T) {
 		t,
 		framework.NewCloudStack(t,
 			framework.WithCloudStackRedhat9Kubernetes126(),
+			framework.WithCloudStackPrivateNetwork(),
 			framework.WithCloudStackFillers(
 				framework.RemoveAllCloudStackAzs(),
 				framework.UpdateAddCloudStackAz3(),
@@ -3614,6 +3746,7 @@ func TestCloudStackKubernetes128RedhatAirgappedProxy(t *testing.T) {
 		t,
 		framework.NewCloudStack(t,
 			framework.WithCloudStackRedhat9Kubernetes128(),
+			framework.WithCloudStackPrivateNetwork(),
 			framework.WithCloudStackFillers(
 				framework.RemoveAllCloudStackAzs(),
 				framework.UpdateAddCloudStackAz3(),
